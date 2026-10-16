@@ -21,6 +21,17 @@
 
 Pelo terminal: `npm install` e depois `npm start` (ou `npm run demo`).
 
+## Publicar no Render
+
+O GitHub armazena o código, mas o GitHub Pages não executa a API, o Socket.IO nem a conexão contínua com o WhatsApp. Para uso real, publique o serviço Node.js no Render:
+
+1. No Render, crie um **Blueprint** e conecte este repositório. O arquivo `render.yaml` configura o serviço, a verificação de saúde e um disco persistente em `/var/data`.
+2. Informe `ADMIN_EMAIL` e `ADMIN_PASSWORD` quando o Render solicitar as variáveis secretas. Use uma senha forte e exclusiva. Elas criam o administrador no primeiro início; mudar as variáveis depois não altera uma conta já gravada no banco.
+3. Faça o deploy e abra a URL `.onrender.com` indicada pelo Render. A interface e a API são servidas juntas; não publique apenas a pasta `public/` no GitHub Pages.
+4. Entre com o administrador, crie os acessos da equipe e conecte o WhatsApp pelo QR Code. Faça backups periódicos em **Equipe → Baixar backup**.
+
+O disco persistente é necessário para preservar o banco, as conversas e a sessão do WhatsApp entre deploys e reinicializações. O plano configurado no Blueprint é `starter`, pois o serviço precisa de disco persistente; consulte os preços atuais do Render. Mantenha o serviço e o disco no mesmo Blueprint e não remova o disco, pois isso apaga os dados armazenados nele.
+
 ## Variáveis opcionais
 
 | Variável | Padrão | Para quê |
@@ -29,13 +40,13 @@ Pelo terminal: `npm install` e depois `npm start` (ou `npm run demo`).
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | — | opcional; configure ambos para provisionar o administrador pelo ambiente em vez da tela inicial |
 | `MAX_AGENTS` | 5 | máximo de atendentes ativos |
 | `DATA_DIR` | `./data` | onde ficam o banco e a sessão do WhatsApp |
-| `COOKIE_SECURE` | — | `1` quando atrás de HTTPS |
+| `COOKIE_SECURE` | — | `1` quando atrás de HTTPS (já definido no Render) |
 
 ## Avisos importantes
 
 - A conexão usa a biblioteca **Baileys** (WhatsApp Web não oficial). Ela funciona bem para equipes pequenas, mas **não é a API oficial da Meta**: existe risco de o número ser restringido se for usado para spam/disparo em massa. Use para atendimento de clientes que escrevem para você. Para operação crítica, considere migrar para a WhatsApp Cloud API.
 - Só conversas individuais são tratadas (grupos e status são ignorados).
-- Na internet, publique atrás de HTTPS (proxy reverso) — na rede local HTTP simples é suficiente.
+- Na internet, publique atrás de HTTPS (o Render fornece HTTPS) — na rede local HTTP simples é suficiente.
 - Guarde a pasta `data/` com cuidado: ela contém todas as conversas e a sessão do WhatsApp.
 
 ## Estrutura
