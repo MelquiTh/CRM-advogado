@@ -1,0 +1,19 @@
+{
+  "name": "crm-whatsapp",
+  "version": "1.0.0",
+  "description": "CRM multiusuário para um único número de WhatsApp",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "demo": "node --disable-warning=ExperimentalWarning src/server.js --demo"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
+    "express": "^4.21.2",
+    "pino": "^9.6.0",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  }
+}

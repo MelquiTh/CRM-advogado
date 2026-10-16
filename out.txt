@@ -1,0 +1,5 @@
+CRM WhatsApp (MODO DEMONSTRAÇÃO) rodando:
+  Neste computador: http://localhost:3000
+  Na rede local:    http://192.168.1.27:3000
+  Banco de dados:   C:\Users\Thiag\OneDrive\Documentos\CRM WhatsApp\crm-whatsapp\data-demo\crm.db
+  Demo: admin@crm.local / admin123  |  ana@crm.local, bruno@crm.local... / demo123
